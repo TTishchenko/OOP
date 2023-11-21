@@ -1,0 +1,1194 @@
+{\rtf1\ansi\ansicpg1251\cocoartf1561\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 TimesNewRomanPSMT;\f2\fmodern\fcharset0 CourierNewPSMT;
+\f3\fmodern\fcharset0 CourierNewPS-ItalicMT;\f4\fmodern\fcharset0 CourierNewPS-BoldItalicMT;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab708
+\pard\pardeftab708\ri-669\partightenfactor0
+
+\f0\fs28 \cf0 \uc0\u1057 \u1092 \u1086 \u1088 \u1084 \u1080 \u1088 \u1086 \u1074 \u1072 \u1090 \u1100  \u1092 \u1072 \u1081 \u1083 , \u1089 \u1086 \u1076 \u1077 \u1088 \u1078 \u1072 \u1097 \u1080 \u1081  \u1090 \u1086 \u1095 \u1082 \u1080  \u1087 \u1086 \u1074 \u1077 \u1088 \u1093 \u1085 \u1086 \u1089 \u1090 \u1080 , \u1086 \u1073 \u1088 \u1072 \u1079 \u1086 \u1074 \u1072 \u1085 \u1085 \u1086 \u1081  \u1074 \u1088 \u1072 \u1097 \u1077 \u1085 \u1080 \u1077 \u1084  \u1092 \u1091 \u1085 \u1082 \u1094 \u1080 \u1080  
+\f1 y=sin(x
+\f0 ) \uc0\u1085 \u1072  \u1076 \u1080 \u1072 \u1087 \u1072 \u1079 \u1086 \u1085 \u1077  -
+\f1 pi/4\'853/4 pi
+\f0  \uc0\u1074 \u1086 \u1082 \u1088 \u1091 \u1075  \u1086 \u1089 \u1080  
+\f1 x
+\f0 . \uc0\u1042 \u1099 \u1074 \u1077 \u1089 \u1090 \u1080  \u1085 \u1072  \u1101 \u1082 \u1088 \u1072 \u1085  \u1087 \u1086 \u1074 \u1077 \u1088 \u1093 \u1085 \u1086 \u1089 \u1090 \u1100  \u1074  \u1074 \u1080 \u1076 \u1077  \u1082 \u1072 \u1088 \u1082 \u1072 \u1089 \u1085 \u1086 \u1081  \u1084 \u1086 \u1076 \u1077 \u1083 \u1080  \u1087 \u1086  \u1087 \u1088 \u1086 \u1095 \u1080 \u1090 \u1072 \u1085 \u1085 \u1099 \u1084  \u1080 \u1079  \u1092 \u1072 \u1081 \u1083 \u1072  \u1079 \u1085 \u1072 \u1095 \u1077 \u1085 \u1080 \u1103 \u1084 .
+\i \
+\
+\uc0\u1060 \u1072 \u1081 \u1083 
+\f1  main.cpp:\
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\pardeftab708\ri-669\partightenfactor0
+
+\f2\i0\fs20 \cf0 #include "painter.h"\
+#include <QApplication>\
+\
+int main(int argc, char *argv[])\
+\{\
+    QApplication a(argc, argv);\
+    Painter w;\
+    w.show();\
+\
+    
+\f3\i return
+\f2\i0  a.exec();\
+\}\
+\pard\pardeftab708\ri-669\partightenfactor0
+
+\f0\i\fs28 \cf0 \uc0\u1060 \u1072 \u1081 \u1083 
+\f1  painter.h:\
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\pardeftab708\ri-669\partightenfactor0
+
+\f2\i0\fs20 \cf0 #ifndef PAINTER_H\
+#define PAINTER_H\
+\
+#include <QWidget>\
+#include <QVector>\
+#include <QFrame>\
+#include <QPainter>\
+#include <QPushButton>\
+#include <QVBoxLayout>\
+#include <QHBoxLayout>\
+#include <QImage>\
+#include <QFile>\
+#include <QDataStream>\
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\pardeftab708\ri-669\partightenfactor0
+
+\f3\i \cf0 class
+\f2\i0  RenderArea;\
+\
+
+\f3\i class
+\f2\i0  Painter : 
+\f3\i public
+\f2\i0  QWidget\
+\{\
+    Q_OBJECT\
+\
+
+\f3\i public
+\f2\i0 :\
+    Painter();\
+    ~
+\f3\i Painter
+\f2\i0 ();\
+
+\f3\i protected
+\f2\i0 :\
+    RenderArea *m_RenderArea;\
+\
+\};\
+\
+
+\f3\i class
+\f2\i0  BaseRenderArea: 
+\f3\i public
+\f2\i0  QFrame\
+\{\
+    Q_OBJECT\
+\
+
+\f3\i public
+\f2\i0 :\
+    
+\f4\i\b ///
+\f2\i0\b0 @brief 
+\f0\i\b \uc0\u1057 \u1090 \u1088 \u1091 \u1082 \u1090 \u1091 \u1088 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1076 \u1083 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1093 \u1088 \u1072 \u1085 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1082 \u1086 \u1086 \u1088 \u1076 \u1080 \u1085 \u1072 \u1090 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 
+\f2\i0\b0  
+\f0\i\b \uc0\u1084 \u1072 \u1089 \u1089 \u1080 \u1074 \u1077 
+\f2\i0\b0 \
+    
+\f3\i struct
+\f2\i0  PointCoords \{\
+        double x;\
+        double y;\
+        PointCoords()\{ x=y=0;\};\
+        PointCoords(double x1, double y1)\{\
+            x=x1; y=y1;\
+        \};\
+    \};\
+    BaseRenderArea(QWidget *parent = 0);\
+\
+    
+\f4\i\b ///
+\f2\i0\b0  @brief 
+\f0\i\b \uc0\u1052 \u1080 \u1085 \u1080 \u1084 \u1072 \u1083 \u1100 \u1085 \u1099 \u1081 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1072 \u1079 \u1084 \u1077 \u1088 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1073 \u1083 \u1072 \u1089 \u1090 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0 \
+    
+\f4\i\b ///
+\f2\i0\b0  @details 
+\f0\i\b \uc0\u1048 \u1079 \u1084 \u1077 \u1085 \u1077 \u1085 \u1080 \u1077 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1072 \u1079 \u1084 \u1077 \u1088 \u1086 \u1074 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1082 \u1085 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1088 \u1080 \u1083 \u1086 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1088 \u1086 \u1080 \u1079 \u1074 \u1086 \u1076 \u1080 \u1090 \u1089 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1089 
+\f2\i0\b0  
+\f0\i\b \uc0\u1091 \u1095 \u1077 \u1090 \u1086 \u1084 
+\f2\i0\b0 \
+    
+\f4\i\b ///
+\f2\i0\b0  
+\f0\i\b \uc0\u1076 \u1086 \u1087 \u1091 \u1089 \u1090 \u1080 \u1087 \u1099 \u1093 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1072 \u1079 \u1084 \u1077 \u1088 \u1086 \u1074 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 \u1089 \u1077 \u1093 
+\f2\i0\b0  
+\f0\i\b \uc0\u1101 \u1083 \u1077 \u1084 \u1077 \u1085 \u1090 \u1086 \u1074 .
+\f2\i0\b0  
+\f0\i\b \uc0\u1060 \u1091 \u1085 \u1082 \u1094 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1073 \u1077 \u1089 \u1087 \u1077 \u1095 \u1080 \u1074 \u1072 \u1077 \u1090 
+\f2\i0\b0  
+\f0\i\b \uc0\u1082 \u1086 \u1088 \u1088 \u1077 \u1082 \u1090 \u1085 \u1086 \u1077 
+\f2\i0\b0 \
+    
+\f4\i\b ///
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1077 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1073 \u1083 \u1072 \u1089 \u1090 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1075 \u1088 \u1072 \u1092 \u1080 \u1095 \u1077 \u1089 \u1082 \u1080 \u1093 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1088 \u1080 \u1084 \u1080 \u1090 \u1080 \u1074 \u1086 \u1074 
+\f2\i0\b0 \
+    
+\f4\i\b ///
+\f2\i0\b0  @return 
+\f0\i\b \uc0\u1044 \u1086 \u1087 \u1091 \u1089 \u1090 \u1080 \u1084 \u1099 \u1077 
+\f2\i0\b0  
+\f0\i\b \uc0\u1084 \u1080 \u1085 \u1080 \u1084 \u1072 \u1083 \u1100 \u1085 \u1099 \u1077 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1072 \u1079 \u1084 \u1077 \u1088 \u1099 
+\f2\i0\b0 \
+    QSize 
+\f3\i minimumSizeHint
+\f2\i0 () 
+\f3\i const
+\f2\i0 ;\
+\
+    
+\f4\i\b ///
+\f2\i0\b0  @brief 
+\f0\i\b \uc0\u1056 \u1072 \u1079 \u1084 \u1077 \u1088 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1073 \u1083 \u1072 \u1089 \u1090 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1086 
+\f2\i0\b0  
+\f0\i\b \uc0\u1091 \u1084 \u1086 \u1083 \u1095 \u1072 \u1085 \u1080 \u1102 
+\f2\i0\b0 \
+    
+\f4\i\b ///
+\f2\i0\b0  @details 
+\f0\i\b \uc0\u1055 \u1088 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1089 \u1086 \u1079 \u1076 \u1072 \u1085 \u1080 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1082 \u1085 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1072 \u1074 \u1090 \u1086 \u1084 \u1072 \u1090 \u1080 \u1095 \u1077 \u1089 \u1082 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1072 \u1089 \u1089 \u1095 \u1080 \u1090 \u1099 \u1074 \u1072 \u1102 \u1090 \u1089 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1072 \u1079 \u1084 \u1077 \u1088 \u1099 
+\f2\i0\b0 \
+    
+\f4\i\b ///
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1086 
+\f2\i0\b0  
+\f0\i\b \uc0\u1091 \u1082 \u1072 \u1079 \u1072 \u1085 \u1085 \u1099 \u1084 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1077 \u1082 \u1086 \u1084 \u1077 \u1085 \u1076 \u1086 \u1074 \u1072 \u1085 \u1085 \u1099 \u1084 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1072 \u1079 \u1084 \u1077 \u1088 \u1072 \u1084 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 \u1089 \u1077 \u1093 
+\f2\i0\b0  
+\f0\i\b \uc0\u1101 \u1083 \u1077 \u1084 \u1077 \u1085 \u1090 \u1086 \u1074 .
+\f2\i0\b0 \
+    
+\f4\i\b ///
+\f2\i0\b0  @return 
+\f0\i\b \uc0\u1088 \u1077 \u1082 \u1086 \u1084 \u1077 \u1085 \u1076 \u1086 \u1074 \u1072 \u1085 \u1085 \u1099 \u1077 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1072 \u1079 \u1084 \u1077 \u1088 \u1099 
+\f2\i0\b0 \
+    QSize 
+\f3\i sizeHint
+\f2\i0 () 
+\f3\i const
+\f2\i0 ;\
+\
+    
+\f4\i\b ///
+\f2\i0\b0  @brief 
+\f0\i\b \uc0\u1060 \u1086 \u1088 \u1084 \u1080 \u1088 \u1091 \u1077 \u1090 
+\f2\i0\b0  
+\f0\i\b \uc0\u1090 \u1077 \u1083 \u1086 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 \u1088 \u1072 \u1097 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1086 
+\f2\i0\b0  
+\f0\i\b \uc0\u1091 \u1082 \u1072 \u1079 \u1072 \u1085 \u1085 \u1086 \u1084 \u1091 
+\f2\i0\b0  
+\f0\i\b \uc0\u1084 \u1072 \u1089 \u1089 \u1080 \u1074 \u1091 
+\f2\i0\b0  
+\f0\i\b \uc0\u1082 \u1086 \u1086 \u1088 \u1076 \u1080 \u1085 \u1072 \u1090 
+\f2\i0\b0 \
+    void setPoints( 
+\f3\i const
+\f2\i0  QVector<PointCoords> &,\
+        double xy_step_angle, double yz_angle, double xz_angle );\
+\
+
+\f3\i protected
+\f2\i0 :\
+    float m_PenWidth; 
+\f4\i\b ///<
+\f2\i0\b0  
+\f0\i\b \uc0\u1064 \u1080 \u1088 \u1080 \u1085 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1077 \u1088 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1086 
+\f2\i0\b0  
+\f0\i\b \uc0\u1091 \u1084 \u1086 \u1083 \u1095 \u1072 \u1085 \u1080 \u1102 .
+\f2\i0\b0 \
+\
+    
+\f4\i\b ///
+\f2\i0\b0  @brief 
+\f0\i\b \uc0\u1054 \u1073 \u1088 \u1072 \u1073 \u1086 \u1090 \u1095 \u1080 \u1082 
+\f2\i0\b0  
+\f0\i\b \uc0\u1089 \u1086 \u1073 \u1099 \u1090 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1077 \u1088 \u1077 \u1088 \u1080 \u1089 \u1086 \u1074 \u1082 \u1080 
+\f2\i0\b0 \
+    
+\f3\i virtual
+\f2\i0  void 
+\f3\i paintEvent
+\f2\i0 (QPaintEvent * event);\
+\
+    QPainterPath m_Path; 
+\f4\i\b ///<
+\f2\i0\b0  
+\f0\i\b \uc0\u1064 \u1072 \u1073 \u1083 \u1086 \u1085 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1075 \u1088 \u1072 \u1092 \u1080 \u1095 \u1077 \u1089 \u1082 \u1080 \u1093 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1088 \u1080 \u1084 \u1080 \u1090 \u1080 \u1074 \u1086 \u1074 .
+\f2\i0\b0 \
+    
+\f3\i friend
+\f2\i0  QDataStream & operator<<(QDataStream &dataStream, 
+\f3\i const
+\f2\i0  BaseRenderArea::PointCoords& str)\
+    \{\
+           dataStream << str.x;\
+           dataStream << str.y;\
+           
+\f3\i return
+\f2\i0  dataStream;\
+    \};\
+    
+\f3\i friend
+\f2\i0  QDataStream & operator>>(QDataStream &dataStream, BaseRenderArea::PointCoords& str)\
+    \{\
+           dataStream >> str.x;\
+           dataStream >> str.y;\
+           
+\f3\i return
+\f2\i0  dataStream;\
+    \};\
+\};\
+\
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\pardeftab708\ri-669\partightenfactor0
+
+\f4\i\b \cf0 /**
+\f2\i0\b0 \
+@class 
+\f4\i\b RenderArea
+\f2\i0\b0 \
+@brief 
+\f0\i\b \uc0\u1054 \u1073 \u1083 \u1072 \u1089 \u1090 \u1100 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1090 \u1077 \u1083 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 \u1088 \u1072 \u1097 \u1077 \u1085 \u1080 \u1103 .
+\f2\i0\b0 \
+@details 
+\f0\i\b \uc0\u1060 \u1086 \u1088 \u1084 \u1080 \u1088 \u1091 \u1077 \u1090 
+\f2\i0\b0  
+\f0\i\b \uc0\u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1072 \u1077 \u1090 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1080 \u1089 \u1091 \u1085 \u1086 \u1082 
+\f2\i0\b0 \
+
+\f4\i\b */
+\f2\i0\b0 \
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\pardeftab708\ri-669\partightenfactor0
+
+\f3\i \cf0 class
+\f2\i0  RenderArea : 
+\f3\i public
+\f2\i0  BaseRenderArea\
+\{\
+    Q_OBJECT\
+\
+
+\f3\i public
+\f2\i0 :\
+    RenderArea(QWidget *parent = 0);\
+\
+    
+\f4\i\b ///
+\f2\i0\b0  @brief 
+\f0\i\b \uc0\u1052 \u1077 \u1090 \u1086 \u1076 
+\f2\i0\b0  
+\f0\i\b \uc0\u1076 \u1083 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1092 \u1086 \u1088 \u1084 \u1080 \u1088 \u1086 \u1074 \u1072 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1090 \u1077 \u1083 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 \u1088 \u1072 \u1097 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1086 
+\f2\i0\b0  
+\f0\i\b \uc0\u1084 \u1072 \u1089 \u1089 \u1080 \u1074 \u1091 
+\f2\i0\b0  
+\f0\i\b \uc0\u1079 \u1085 \u1072 \u1095 \u1077 \u1085 \u1080 \u1081 
+\f2\i0\b0 \
+    void setPoints( 
+\f3\i const
+\f2\i0  QVector<PointCoords> &,\
+        double xy_step_angle, double yz_angle, double xz_angle );\
+    void getPoints();\
+    void setData(QVector<PointCoords> &data);\
+\};\
+#endif 
+\f3\i //
+\f2\i0  
+\f3\i PAINTER_H
+\f2\i0 \
+\pard\pardeftab708\ri-669\partightenfactor0
+
+\f0\i\fs28 \cf0 \uc0\u1060 \u1072 \u1081 \u1083 
+\f1  painter.cpp:\
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\pardeftab708\ri-669\partightenfactor0
+
+\f2\i0\fs20 \cf0 #include "painter.h"\
+\
+#define _USE_MATH_DEFINES\
+#include "math.h"\
+\
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\pardeftab708\ri-669\partightenfactor0
+
+\f3\i \cf0 //
+\f2\i0  
+\f0\i \uc0\u1056 \u1072 \u1079 \u1084 \u1077 \u1088 
+\f2\i0  
+\f0\i \uc0\u1087 \u1086 \u1083 \u1103 
+\f2\i0  
+\f0\i \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0 \
+
+\f3\i const
+\f2\i0  float _x_aspect=400;\
+
+\f3\i const
+\f2\i0  float _y_aspect=400;\
+\
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\pardeftab708\ri-669\partightenfactor0
+
+\f4\i\b \cf0 ///
+\f2\i0\b0  @brief 
+\f0\i\b \uc0\u1050 \u1086 \u1085 \u1089 \u1090 \u1088 \u1091 \u1082 \u1090 \u1086 \u1088 
+\f2\i0\b0  
+\f0\i\b \uc0\u1075 \u1083 \u1072 \u1074 \u1085 \u1086 \u1075 \u1086 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1082 \u1085 \u1072 
+\f2\i0\b0 \
+
+\f4\i\b ///
+\f2\i0\b0  @details 
+\f0\i\b \uc0\u1059 \u1089 \u1090 \u1072 \u1085 \u1072 \u1074 \u1083 \u1080 \u1074 \u1072 \u1077 \u1090 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1077 \u1078 \u1080 \u1084 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 \u1099 \u1088 \u1072 \u1074 \u1085 \u1080 \u1074 \u1072 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1101 \u1083 \u1077 \u1084 \u1077 \u1085 \u1090 \u1086 \u1074 
+\f2\i0\b0  
+\f0\i\b \uc0\u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1089 \u1086 \u1079 \u1076 \u1072 \u1077 \u1090 
+\f2\i0\b0  
+\f0\i\b \uc0\u1080 \u1093 .
+\f2\i0\b0 \
+Painter::Painter()\
+\{\
+    setWindowTitle("Rotated y = sin(x), -pi/4 < x < 3/4*pi about the x-axis");\
+    QVBoxLayout *layout = 
+\f3\i new
+\f2\i0  QVBoxLayout;\
+    QHBoxLayout *hlayout = 
+\f3\i new
+\f2\i0  QHBoxLayout;\
+\
+    m_RenderArea = 
+\f3\i new
+\f2\i0  RenderArea( 
+\f3\i this
+\f2\i0  );\
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1091 \u1089 \u1090 \u1072 \u1085 \u1072 \u1074 \u1083 \u1080 \u1074 \u1072 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1087 \u1086 \u1088 \u1103 \u1076 \u1086 \u1082 
+\f2\i0  
+\f0\i \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0  
+\f0\i \uc0\u1087 \u1072 \u1085 \u1077 \u1083 \u1077 \u1081 
+\f2\i0 \
+    hlayout->addWidget(m_RenderArea);\
+\
+    QPushButton * btn = 
+\f3\i new
+\f2\i0  QPushButton( "Close", 
+\f3\i this
+\f2\i0  );\
+    QObject::connect(btn, 
+\f3\i SIGNAL
+\f2\i0 (clicked(bool)), 
+\f3\i this
+\f2\i0 , 
+\f3\i SLOT
+\f2\i0 (close()));\
+\
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1092 \u1086 \u1088 \u1084 \u1080 \u1088 \u1091 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1086 \u1082 \u1086 \u1085 \u1095 \u1072 \u1090 \u1077 \u1083 \u1100 \u1085 \u1099 \u1081 
+\f2\i0  
+\f0\i \uc0\u1074 \u1080 \u1076 ,
+\f2\i0  
+\f0\i \uc0\u1076 \u1086 \u1073 \u1072 \u1074 \u1083 \u1103 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1082 \u1085 \u1086 \u1087 \u1082 \u1091 
+\f2\i0  
+\f3\i Close
+\f2\i0 \
+    layout->addLayout(hlayout);\
+    layout->addWidget( btn );\
+    setLayout(layout);\
+    setFixedSize(420,400);\
+    double xy_step_angle, yz_angle, xz_angle;\
+    QVector<BaseRenderArea::PointCoords> data;\
+\
+    xy_step_angle =  2*M_PI/180.0;\
+    yz_angle =  180*M_PI/180.0;\
+    xz_angle =  105*M_PI/180.0;\
+\
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\pardeftab708\ri-669\partightenfactor0
+
+\f3\i \cf0 //
+\f2\i0     
+\f3\i xy_step_angle
+\f2\i0  
+\f3\i =
+\f2\i0   
+\f3\i 2*M_PI/180.0;
+\f2\i0 \
+
+\f3\i //
+\f2\i0     
+\f3\i yz_angle
+\f2\i0  
+\f3\i =
+\f2\i0   
+\f3\i 180*M_PI/180.0;
+\f2\i0 \
+
+\f3\i //
+\f2\i0     
+\f3\i xz_angle
+\f2\i0  
+\f3\i =
+\f2\i0   
+\f3\i 90*M_PI/180.0;
+\f2\i0 \
+\
+
+\f3\i //
+\f2\i0     
+\f3\i m_RenderArea->getPoints();
+\f2\i0 \
+    m_RenderArea->setData(data);\
+    m_RenderArea->setPoints(data, xy_step_angle, yz_angle, xz_angle);\
+\};\
+\
+Painter::~
+\f3\i Painter
+\f2\i0 ()\
+\{\
+\
+\}\
+\pard\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\pardeftab708\ri-669\partightenfactor0
+
+\f4\i\b \cf0 ///
+\f2\i0\b0  @details 
+\f0\i\b \uc0\u1050 \u1086 \u1085 \u1089 \u1090 \u1088 \u1091 \u1082 \u1090 \u1086 \u1088 
+\f2\i0\b0  
+\f0\i\b \uc0\u1073 \u1072 \u1079 \u1086 \u1074 \u1086 \u1075 \u1086 
+\f2\i0\b0  
+\f0\i\b \uc0\u1082 \u1083 \u1072 \u1089 \u1089 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1072 \u1085 \u1077 \u1083 \u1077 \u1081 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 \u1074 \u1086 \u1076 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 .
+\f2\i0\b0 \
+
+\f4\i\b ///
+\f2\i0\b0           
+\f0\i\b \uc0\u1059 \u1089 \u1090 \u1072 \u1085 \u1072 \u1074 \u1083 \u1080 \u1074 \u1072 \u1077 \u1090 
+\f2\i0\b0  
+\f0\i\b \uc0\u1092 \u1086 \u1088 \u1084 \u1072 \u1090 
+\f2\i0\b0  
+\f0\i\b \uc0\u1088 \u1072 \u1084 \u1082 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1080 \u1085 \u1080 \u1094 \u1080 \u1072 \u1083 \u1080 \u1079 \u1080 \u1088 \u1091 \u1077 \u1090 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1073 \u1097 \u1080 \u1077 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1077 \u1088 \u1077 \u1084 \u1077 \u1085 \u1085 \u1099 \u1077 .
+\f2\i0\b0 \
+
+\f4\i\b ///
+\f2\i0\b0  @param 
+\f4\i\b parent
+\f2\i0\b0  
+\f4\i\b -
+\f2\i0\b0  
+\f0\i\b \uc0\u1045 \u1089 \u1083 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1079 \u1085 \u1072 \u1095 \u1077 \u1085 \u1080 \u1077 
+\f2\i0\b0  
+\f4\i\b NULL,
+\f2\i0\b0  
+\f0\i\b \uc0\u1090 \u1086 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1073 \u1083 \u1072 \u1089 \u1090 \u1100 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1089 \u1090 \u1072 \u1085 \u1077 \u1090 
+\f2\i0\b0 \
+
+\f4\i\b ///
+\f2\i0\b0         
+\f0\i\b \uc0\u1089 \u1072 \u1084 \u1086 \u1089 \u1090 \u1086 \u1103 \u1090 \u1077 \u1083 \u1100 \u1085 \u1099 \u1084 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1082 \u1085 \u1086 \u1084 .
+\f2\i0\b0  
+\f0\i\b \uc0\u1042 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1088 \u1086 \u1090 \u1080 \u1074 \u1085 \u1086 \u1084 
+\f2\i0\b0  
+\f0\i\b \uc0\u1089 \u1083 \u1091 \u1095 \u1072 \u1077 
+\f2\i0\b0  
+\f4\i\b -
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 \u1080 \u1076 \u1078 \u1077 \u1090 \u1086 \u1084 -\u1087 \u1086 \u1090 \u1086 \u1084 \u1082 \u1086 \u1084 .
+\f2\i0\b0 \
+BaseRenderArea::BaseRenderArea(QWidget *parent):QFrame(parent)\
+\{\
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1092 \u1086 \u1088 \u1084 \u1080 \u1088 \u1091 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1088 \u1072 \u1084 \u1082 \u1091 
+\f2\i0  
+\f0\i \uc0\u1074 \u1086 \u1082 \u1088 \u1091 \u1075 
+\f2\i0  
+\f0\i \uc0\u1074 \u1080 \u1076 \u1078 \u1077 \u1090 \u1072 
+\f2\i0 \
+    setFrameStyle(QFrame::
+\f3\i Panel
+\f2\i0  | QFrame::
+\f3\i Raised
+\f2\i0 );\
+    setLineWidth(2);\
+    
+\f0\i //\uc0\u1059 \u1089 \u1090 \u1072 \u1085 \u1086 \u1074 \u1080 \u1084 
+\f2\i0  
+\f0\i \uc0\u1087 \u1077 \u1088 \u1086 
+\f2\i0  
+\f0\i \uc0\u1087 \u1086 
+\f2\i0  
+\f0\i \uc0\u1091 \u1084 \u1086 \u1083 \u1095 \u1072 \u1085 \u1080 \u1102 ,
+\f2\i0  
+\f0\i \uc0\u1088 \u1072 \u1074 \u1085 \u1086 \u1077 
+\f2\i0  
+\f3\i 2
+\f2\i0 \
+    m_PenWidth=2;\
+\};\
+\
+QSize BaseRenderArea::
+\f3\i minimumSizeHint
+\f2\i0 () 
+\f3\i const
+\f2\i0 \
+\{\
+    
+\f3\i return
+\f2\i0  QSize(100, 100);\
+\}\
+QSize BaseRenderArea::
+\f3\i sizeHint
+\f2\i0 () 
+\f3\i const
+\f2\i0 \
+\{\
+    
+\f3\i return
+\f2\i0  QSize(_x_aspect, _y_aspect);\
+\}\
+\
+void BaseRenderArea::
+\f3\i paintEvent
+\f2\i0 (QPaintEvent *event)\
+\{\
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1043 \u1086 \u1090 \u1086 \u1074 \u1080 \u1084 
+\f2\i0  
+\f0\i \uc0\u1086 \u1073 \u1098 \u1077 \u1082 \u1090 
+\f2\i0  
+\f0\i \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0 \
+    QPainter painter(
+\f3\i this
+\f2\i0 );\
+\
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1054 \u1087 \u1088 \u1077 \u1076 \u1077 \u1083 \u1103 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1088 \u1077 \u1078 \u1080 \u1084 
+\f2\i0  
+\f0\i \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0  
+\f0\i \uc0\u1089 \u1086 
+\f2\i0  
+\f0\i \uc0\u1089 \u1075 \u1083 \u1072 \u1078 \u1080 \u1074 \u1072 \u1085 \u1080 \u1077 \u1084 
+\f2\i0 \
+    painter.setRenderHint(QPainter::
+\f3\i Antialiasing
+\f2\i0 );\
+\
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1054 \u1087 \u1088 \u1077 \u1076 \u1077 \u1083 \u1103 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1084 \u1072 \u1089 \u1096 \u1090 \u1072 \u1073 
+\f2\i0  
+\f0\i \uc0\u1074 
+\f2\i0  
+\f0\i \uc0\u1079 \u1072 \u1074 \u1080 \u1089 \u1080 \u1084 \u1086 \u1089 \u1090 \u1080 
+\f2\i0  
+\f0\i \uc0\u1086 \u1090 
+\f2\i0  
+\f0\i \uc0\u1090 \u1077 \u1082 \u1091 \u1097 \u1080 \u1093 
+\f2\i0  
+\f0\i \uc0\u1075 \u1077 \u1086 \u1084 \u1077 \u1090 \u1088 \u1080 \u1095 \u1077 \u1089 \u1082 \u1080 \u1093 
+\f2\i0  
+\f0\i \uc0\u1088 \u1072 \u1079 \u1084 \u1077 \u1088 \u1086 \u1074 
+\f2\i0 \
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1086 \u1073 \u1083 \u1072 \u1089 \u1090 \u1080 
+\f2\i0  
+\f0\i \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0 \
+    painter.scale( width()/_x_aspect, height()/_y_aspect );\
+\
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1057 \u1086 \u1079 \u1076 \u1072 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1087 \u1077 \u1088 \u1086 
+\f2\i0  
+\f0\i \uc0\u1076 \u1083 \u1103 
+\f2\i0  
+\f0\i \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0  
+\f0\i \uc0\u1082 \u1086 \u1085 \u1090 \u1091 \u1088 \u1086 \u1074 .
+\f2\i0  
+\f0\i \uc0\u1048 \u1089 \u1087 \u1086 \u1083 \u1100 \u1079 \u1091 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1082 \u1088 \u1072 \u1089 \u1085 \u1099 \u1081 
+\f2\i0  
+\f0\i \uc0\u1094 \u1074 \u1077 \u1090 
+\f2\i0  
+\f0\i \uc0\u1080 
+\f2\i0  
+\f0\i \uc0\u1090 \u1086 \u1083 \u1097 \u1080 \u1085 \u1091 
+\f2\i0 \
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1083 \u1080 \u1085 \u1080 \u1081 
+\f2\i0  
+\f0\i \uc0\u1088 \u1072 \u1074 \u1085 \u1091 \u1102 
+\f2\i0  
+\f3\i m_PenWidth.
+\f2\i0 \
+    painter.setPen(\
+        QPen(QColor(0,0,0), m_PenWidth, Qt::
+\f3\i SolidLine
+\f2\i0 , Qt::
+\f3\i RoundCap
+\f2\i0 , Qt::
+\f3\i RoundJoin
+\f2\i0 ));\
+\
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1054 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1072 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1082 \u1086 \u1085 \u1090 \u1091 \u1088 \u1099 
+\f2\i0 \
+    painter.drawPath( m_Path );\
+\
+    QFrame::
+\f3\i paintEvent
+\f2\i0 (event); 
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1088 \u1080 \u1089 \u1091 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1088 \u1072 \u1084 \u1082 \u1091 
+\f2\i0  
+\f0\i \uc0\u1074 \u1086 \u1082 \u1088 \u1091 \u1075 
+\f2\i0  
+\f0\i \uc0\u1087 \u1072 \u1085 \u1077 \u1083 \u1080 
+\f2\i0  
+\f0\i \uc0\u1074 \u1099 \u1079 \u1086 \u1074 \u1086 \u1084 
+\f2\i0  
+\f0\i \uc0\u1087 \u1088 \u1077 \u1076 \u1082 \u1072 
+\f2\i0 \
+\}\
+\
+
+\f4\i\b ///
+\f2\i0\b0  @brief 
+\f0\i\b \uc0\u1050 \u1086 \u1085 \u1089 \u1090 \u1088 \u1091 \u1082 \u1090 \u1086 \u1088 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1073 \u1083 \u1072 \u1089 \u1090 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1086 \u1090 \u1086 \u1073 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0 \
+RenderArea::RenderArea(QWidget *parent)\
+: BaseRenderArea(parent)\
+\{\
+    setBackgroundRole(QPalette::
+\f3\i Base
+\f2\i0 );\
+    m_PenWidth=0.5;\
+\}\
+void RenderArea::setData(QVector<PointCoords> & data) \{\
+    QFile dataFile("/Users/Andrey/coords.dat");\
+    dataFile.
+\f3\i open
+\f2\i0 (QIODevice::
+\f3\i ReadOnly
+\f2\i0 );\
+    QDataStream in(&dataFile);\
+    PointCoords point;\
+    
+\f3\i while
+\f2\i0  (!in.atEnd()) \{\
+        in >> point;\
+        data.push_back(point);\
+    \}\
+    dataFile.
+\f3\i close
+\f2\i0 ();\
+\}\
+\
+
+\f4\i\b ///
+\f2\i0\b0  @param 
+\f4\i\b data
+\f2\i0\b0  
+\f4\i\b -
+\f2\i0\b0  
+\f0\i\b \uc0\u1084 \u1072 \u1089 \u1089 \u1080 \u1074 
+\f2\i0\b0  
+\f0\i\b \uc0\u1090 \u1086 \u1095 \u1077 \u1082 
+\f2\i0\b0  
+\f0\i\b \uc0\u1082 \u1088 \u1080 \u1074 \u1086 \u1081 
+\f2\i0\b0 \
+
+\f4\i\b ///
+\f2\i0\b0  @param 
+\f4\i\b xy_step_angle
+\f2\i0\b0  
+\f4\i\b -
+\f2\i0\b0  
+\f0\i\b \uc0\u1096 \u1072 \u1075 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1086 \u1074 \u1086 \u1088 \u1086 \u1090 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1088 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1092 \u1086 \u1088 \u1084 \u1080 \u1088 \u1086 \u1074 \u1072 \u1085 \u1080 \u1080 
+\f2\i0\b0  
+\f0\i\b \uc0\u1090 \u1077 \u1083 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 \u1088 \u1072 \u1097 \u1077 \u1085 \u1080 \u1103 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 
+\f2\i0\b0  
+\f0\i\b \uc0\u1075 \u1088 \u1072 \u1076 \u1091 \u1089 \u1072 \u1093 
+\f2\i0\b0 \
+
+\f4\i\b ///
+\f2\i0\b0  @param 
+\f4\i\b yz_angle
+\f2\i0\b0  
+\f4\i\b -
+\f2\i0\b0  
+\f0\i\b \uc0\u1091 \u1075 \u1086 \u1083 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1086 \u1074 \u1086 \u1088 \u1086 \u1090 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 
+\f2\i0\b0  
+\f0\i\b \uc0\u1075 \u1088 \u1072 \u1076 \u1091 \u1089 \u1072 \u1093 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1083 \u1086 \u1089 \u1082 \u1086 \u1089 \u1090 \u1080 
+\f2\i0\b0  
+\f4\i\b yz
+\f2\i0\b0 \
+
+\f4\i\b ///
+\f2\i0\b0  @param 
+\f4\i\b xz_angle
+\f2\i0\b0  
+\f4\i\b -
+\f2\i0\b0  
+\f0\i\b \uc0\u1091 \u1075 \u1086 \u1083 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1086 \u1074 \u1086 \u1088 \u1086 \u1090 \u1072 
+\f2\i0\b0  
+\f0\i\b \uc0\u1074 
+\f2\i0\b0  
+\f0\i\b \uc0\u1075 \u1088 \u1072 \u1076 \u1091 \u1089 \u1072 \u1093 
+\f2\i0\b0  
+\f0\i\b \uc0\u1087 \u1083 \u1086 \u1089 \u1082 \u1086 \u1089 \u1090 \u1080 
+\f2\i0\b0  
+\f4\i\b xz
+\f2\i0\b0 \
+void RenderArea::setPoints( 
+\f3\i const
+\f2\i0  QVector<PointCoords> & data,\
+                           double xy_step_angle, double yz_angle, double xz_angle )\
+\{\
+    m_Path=QPainterPath();	
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1086 \u1095 \u1080 \u1097 \u1072 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1086 \u1073 \u1083 \u1072 \u1089 \u1090 \u1100 
+\f2\i0  
+\f0\i \uc0\u1074 \u1099 \u1074 \u1086 \u1076 \u1072 
+\f2\i0 \
+\
+    
+\f3\i if
+\f2\i0 (!data.size())
+\f3\i return
+\f2\i0 ; 
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1045 \u1089 \u1083 \u1080 
+\f2\i0  
+\f0\i \uc0\u1085 \u1072 
+\f2\i0  
+\f0\i \uc0\u1074 \u1093 \u1086 \u1076 \u1077 
+\f2\i0  
+\f0\i \uc0\u1085 \u1080 \u1095 \u1077 \u1075 \u1086 
+\f2\i0  
+\f0\i \uc0\u1085 \u1077 \u1090 
+\f2\i0  
+\f3\i -
+\f2\i0  
+\f0\i \uc0\u1074 \u1099 \u1093 \u1086 \u1076 \u1080 \u1084 
+\f2\i0 \
+\
+    double phi;\
+    double x,y,z;\
+    double xw, yw;\
+\
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1076 \u1083 \u1103 
+\f2\i0  
+\f0\i \uc0\u1091 \u1089 \u1082 \u1086 \u1088 \u1077 \u1085 \u1080 \u1103 
+\f2\i0  
+\f0\i \uc0\u1088 \u1072 \u1073 \u1086 \u1090 \u1099 
+\f2\i0  
+\f0\i \uc0\u1087 \u1088 \u1086 \u1075 \u1088 \u1072 \u1084 \u1084 \u1099 ,
+\f2\i0  
+\f0\i \uc0\u1089 \u1080 \u1085 \u1091 \u1089 \u1099 
+\f2\i0  
+\f0\i \uc0\u1080 
+\f2\i0  
+\f0\i \uc0\u1082 \u1086 \u1089 \u1080 \u1085 \u1091 \u1089 \u1099 
+\f2\i0 \
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1074 \u1099 \u1095 \u1080 \u1089 \u1083 \u1103 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1079 \u1072 \u1088 \u1072 \u1085 \u1077 \u1077 
+\f2\i0 \
+    double cos_yz=cos(yz_angle), sin_yz=sin(yz_angle);\
+    double cos_xz=cos(xz_angle), sin_xz=sin(xz_angle);\
+\
+    
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1094 \u1080 \u1082 \u1083 ,
+\f2\i0  
+\f0\i \uc0\u1092 \u1086 \u1088 \u1084 \u1080 \u1088 \u1091 \u1102 \u1097 \u1080 \u1081 
+\f2\i0  
+\f0\i \uc0\u1090 \u1077 \u1083 \u1086 
+\f2\i0  
+\f0\i \uc0\u1074 \u1088 \u1072 \u1097 \u1077 \u1085 \u1080 \u1103 
+\f2\i0  
+\f0\i \uc0\u1080 \u1079 
+\f2\i0  
+\f0\i \uc0\u1083 \u1080 \u1085 \u1080 \u1080 
+\f2\i0 \
+    
+\f3\i for
+\f2\i0 ( phi=M_PI/24; phi<2*M_PI+M_PI/24; phi+=xy_step_angle)\{\
+        
+\f3\i const
+\f2\i0  PointCoords  *point;\
+        double sin_r1=sin(phi), cos_r1=cos(phi);\
+        
+\f3\i for
+\f2\i0 (int i=0; i<data.size();i++)\{\
+            point=&data[i];\
+\
+            
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1087 \u1077 \u1088 \u1077 \u1085 \u1072 \u1079 \u1085 \u1072 \u1095 \u1072 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1082 \u1086 \u1086 \u1088 \u1076 \u1080 \u1085 \u1072 \u1090 \u1099 .
+\f2\i0 \
+            z=point->x;\
+            x=point->y;\
+            
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1089 \u1084 \u1086 \u1090 \u1088 \u1080 \u1084 
+\f2\i0  
+\f0\i \uc0\u1074 \u1076 \u1086 \u1083 \u1100 
+\f2\i0  
+\f3\i z.
+\f2\i0   
+\f0\i \uc0\u1055 \u1086 \u1074 \u1086 \u1088 \u1072 \u1095 \u1080 \u1074 \u1072 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1087 \u1083 \u1086 \u1089 \u1082 \u1086 \u1089 \u1090 \u1100 
+\f2\i0  
+\f3\i x-y.
+\f2\i0 \
+            
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1055 \u1086 \u1089 \u1082 \u1086 \u1083 \u1100 \u1082 \u1091 
+\f2\i0  
+\f3\i y=0,
+\f2\i0  
+\f0\i \uc0\u1074 \u1099 \u1095 \u1080 \u1089 \u1083 \u1077 \u1085 \u1080 \u1103 
+\f2\i0  
+\f0\i \uc0\u1086 \u1090 \u1085 \u1086 \u1089 \u1080 \u1090 \u1077 \u1083 \u1100 \u1085 \u1086 
+\f2\i0  
+\f3\i y
+\f2\i0  
+\f0\i \uc0\u1086 \u1090 \u1073 \u1088 \u1072 \u1089 \u1099 \u1074 \u1072 \u1077 \u1084 
+\f2\i0 \
+            xw=x*cos_r1; 
+\f3\i //-y*sin_fi;
+\f2\i0 \
+            y=x*sin_r1; 
+\f3\i //+y*cos_fi;
+\f2\i0 \
+            x=xw;\
+\
+            
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1055 \u1086 \u1074 \u1086 \u1088 \u1072 \u1095 \u1080 \u1074 \u1072 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1074 
+\f2\i0  
+\f0\i \uc0\u1087 \u1083 \u1086 \u1089 \u1082 \u1086 \u1089 \u1090 \u1080 
+\f2\i0  
+\f3\i y-z
+\f2\i0 \
+            yw=y*cos_yz-z*sin_yz;\
+            z=y*sin_yz+z*cos_yz;\
+            y=yw;\
+\
+            
+\f3\i //
+\f2\i0  
+\f0\i \uc0\u1055 \u1086 \u1074 \u1086 \u1088 \u1072 \u1095 \u1080 \u1074 \u1072 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1074 
+\f2\i0  
+\f0\i \uc0\u1087 \u1083 \u1086 \u1089 \u1082 \u1086 \u1089 \u1090 \u1080 
+\f2\i0  
+\f3\i x-z
+\f2\i0 \
+            xw=x*cos_xz-z*sin_xz;\
+            
+\f3\i //z=x*sin_fi+z*cos_fi;//
+\f2\i0  
+\f3\i z
+\f2\i0  
+\f3\i -
+\f2\i0  
+\f0\i \uc0\u1076 \u1072 \u1083 \u1100 \u1096 \u1077 
+\f2\i0  
+\f0\i \uc0\u1085 \u1077 
+\f2\i0  
+\f0\i \uc0\u1080 \u1089 \u1087 \u1086 \u1083 \u1100 \u1079 \u1091 \u1077 \u1090 \u1089 \u1103 
+\f2\i0 \
+            x=xw;\
+\
+            
+\f0\i //\uc0\u1087 \u1088 \u1086 \u1077 \u1094 \u1080 \u1088 \u1091 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1085 \u1072 
+\f2\i0  
+\f0\i \uc0\u1101 \u1082 \u1088 \u1072 \u1085 ,
+\f2\i0  
+\f0\i \uc0\u1086 \u1090 \u1073 \u1088 \u1086 \u1089 \u1080 \u1074 
+\f2\i0  
+\f3\i z
+\f2\i0 \
+            
+\f0\i //\uc0\u1057 \u1084 \u1077 \u1097 \u1072 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1074 
+\f2\i0  
+\f0\i \uc0\u1089 \u1077 \u1088 \u1077 \u1076 \u1080 \u1085 \u1091 
+\f2\i0  
+\f0\i \uc0\u1087 \u1072 \u1085 \u1077 \u1083 \u1080 
+\f2\i0  
+\f0\i \uc0\u1080 
+\f2\i0  
+\f0\i \uc0\u1084 \u1072 \u1089 \u1096 \u1090 \u1072 \u1073 \u1080 \u1088 \u1091 \u1077 \u1084 
+\f2\i0  
+\f0\i \uc0\u1089 
+\f2\i0  
+\f0\i \uc0\u1082 \u1086 \u1101 \u1092 \u1092 \u1080 \u1094 \u1080 \u1077 \u1085 \u1090 \u1086 \u1084 
+\f2\i0  
+\f3\i 100
+\f2\i0 \
+            xw=_x_aspect/3+x*100;\
+            yw=_y_aspect/2+y*100;\
+\
+            
+\f3\i if
+\f2\i0 ( !i ) m_Path.moveTo(xw,yw);\
+            
+\f3\i else
+\f2\i0  
+\f3\i /*m_Path.lineTo(xw,yw);*/
+\f2\i0  m_Path.addEllipse(xw,yw,0.5,0.5);\
+        \}\
+    \}\
+    update();\
+\};\
+void RenderArea::getPoints()\
+\{\
+    QFile data("/Users/Andrey/coords.dat");\
+    data.
+\f3\i open
+\f2\i0 (QIODevice::
+\f3\i WriteOnly
+\f2\i0 );\
+    QDataStream out(&data);\
+    
+\f3\i for
+\f2\i0  (double x =-M_PI/4; x <= 0.75*M_PI; x+=M_PI/96 ) \{\
+        out << PointCoords(x, sin(x));\
+    \}\
+    data.
+\f3\i close
+\f2\i0 ();\
+\pard\pardeftab708\ri-669\partightenfactor0
+
+\f1 \cf0 \};}
